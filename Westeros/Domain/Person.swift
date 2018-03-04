@@ -14,12 +14,7 @@ final class Person {
     
     private let _alias: String?
     var alias: String {
-        /*if let _alias = _alias {
-            //Existe y esta en _alias
-            return _alias
-        }else{
-            return ""
-        }*/
+
         return _alias ?? ""
         
     }

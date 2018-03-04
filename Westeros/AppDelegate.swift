@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Vamos a crear unos modelo
         let houses = Repository.local.houses
-        
+        let seasons = RepositorySeasons.localS.seasons
       
         
         
@@ -77,6 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let lastSelectedHouse = houseListViewController.lastSelectedHouse()
         let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse)
         
+        //Proves SeasonListViewController
+        let seasonListViewController = SeasonListViewController(model: seasons)
+        
         // Asignar los delegados
         houseListViewController.delegate = houseDetailViewController
         
@@ -94,8 +97,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // let houseListViewController = HouseViewListController(model: houses)
         
         //Asignamos el rootVC
-        //Necesario para que funcione 
-        window?.rootViewController = splitViewController
+        //Necesario para que funcione
+        //Proves de Seasons
+        
+        
+         window?.rootViewController = seasonListViewController.wrappedInNavigtion()
+       // window?.rootViewController = splitViewController
+        
+        
         //UINavigationBar.appearance().backgroundColor = .blue
         
         
