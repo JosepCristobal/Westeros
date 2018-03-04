@@ -79,16 +79,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Proves SeasonListViewController
         let seasonListViewController = SeasonListViewController(model: seasons)
+        let lastSelectedSeason = seasonListViewController.lastSelectedSeason()
+        let seasonDetailViewController = SeasonDetailViewController(model: lastSelectedSeason)
+        
+        
+        // Practica. Ahora vamos a incluir HouseList y SeasonList en un tabbar
+         let tabBarViewControllerR = UITabBarController()
+        tabBarViewControllerR.title = "Westeros"
+            tabBarViewControllerR.viewControllers = [
+                houseListViewController.wrappedInNavigtion(),
+                seasonListViewController.wrappedInNavigtion()]
         
         // Asignar los delegados
         houseListViewController.delegate = houseDetailViewController
-        
+        seasonListViewController.delegateS = seasonDetailViewController
         //Crear el UISplitVC y le asignamos los viewControlles (master y detail)
         
         let splitViewController = UISplitViewController()
         splitViewController.viewControllers = [
-        houseListViewController.wrappedInNavigtion(),
-        houseDetailViewController.wrappedInNavigtion()]
+            tabBarViewControllerR.wrappedInNavigtion(),
+        houseDetailViewController.wrappedInNavigtion(),
+        seasonDetailViewController.wrappedInNavigtion()]
         // Primero el master y despues el detail
         
         
@@ -100,9 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Necesario para que funcione
         //Proves de Seasons
         
-        
-         window?.rootViewController = seasonListViewController.wrappedInNavigtion()
-        //window?.rootViewController = splitViewController
+        //window?.rootViewController=tabBarViewController
+        // window?.rootViewController = seasonListViewController.wrappedInNavigtion()
+        window?.rootViewController = splitViewController
         
         
         //UINavigationBar.appearance().backgroundColor = .blue
@@ -110,11 +121,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        let tabBarViewController = UITabBarController()
+       // let tabBarViewController = UITabBarController()
        // tabBarViewController.viewControllers = controllers
-        tabBarViewController.viewControllers = houses
-                .map{HouseDetailViewController(model: $0)}
-                .map{$0.wrappedInNavigtion()}
+        //tabBarViewController.viewControllers = houses
+               // .map{HouseDetailViewController(model: $0)}
+               // .map{$0.wrappedInNavigtion()}
         //tabBarViewController.viewControllers = navigationsControllers
         //tabBarViewController.viewControllers = [
        //     starkHouseViewController.wrappedInNavigtion(), lanisterHouseViewController.wrappedInNavigtion()

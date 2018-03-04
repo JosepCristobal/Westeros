@@ -7,10 +7,20 @@
 //
 
 import UIKit
+let SEASON_DID_CHANGE_NOTIFICATION_NAME = "SeasonDidChange"
+let SEASON_KEY = "SeasonKey"
+let LAST_SEASON = "LAST_SEASON"
+
+protocol SeasonListViewControllerDelegate{
+    func seasonListViewConroller(_ vc: SeasonListViewController, didSelectSeason: Seasons)
+    
+}
+
 
 class SeasonListViewController: UITableViewController {
     
     let model: [Seasons]
+    var delegateS: SeasonListViewControllerDelegate?
     
     // Mark: - Initializacion
     init(model: [Seasons]){
@@ -27,7 +37,10 @@ class SeasonListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let lastRow = UserDefaults.standard.integer(forKey: LAST_SEASON)
+        let indexPath = IndexPath(row: lastRow, section: 0)
+        
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
 
    
@@ -68,14 +81,55 @@ class SeasonListViewController: UITableViewController {
         let season = model[indexPath.row]
         
         //Creamos un controlador de detalle de esta temporada
-        let seasonDetailViewController = SeasonDetailViewController(modelS: season)
+        //let seasonDetailViewController = SeasonDetailViewController(model: season)
         
         //Hacemos un push
-        navigationController?.pushViewController(seasonDetailViewController, animated: true)
+        //navigationController?.pushViewController(seasonDetailViewController, animated: true)
+        //Avisamos al delegado
+        delegateS?.seasonListViewConroller(self, didSelectSeason: season)
+        
+        //Mandamos la misma info a través de notificaciones
+        //Utilizaremos la clase llamada notification center
+        let notificationCenter = NotificationCenter.default
+        //Utilizaremos este tipo para pasar la temporada
+        let notification = Notification(name: Notification.Name(SEASON_DID_CHANGE_NOTIFICATION_NAME), object: self, userInfo: [SEASON_KEY: season])
+        
+        notificationCenter.post(notification)
+        
+       // let lastRow = UserDefaults.standard.integer(forKey: LAST_SEASON)
+        //let indexPath = IndexPath(row: lastRow, section: 0)
+        
+        //tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         
     }
    
 }
+extension SeasonListViewController{
+    //Tenemos las temporadas guardadas
+    func saveLastSelectedSeason(at row: Int){
+        let defaults = UserDefaults.standard
+        defaults.set(row, forKey: LAST_SEASON)
+        // Por si las moscas
+        defaults.synchronize()
+    }
+    func lastSelectedSeason() -> Seasons{
+        //Extraer la row del User Default
+        let row = UserDefaults.standard.integer(forKey: LAST_SEASON)
+        //Averigura la temporada de este row
+        let season = model[row]
+        
+        //Devolverla
+        return season
+    }
+}
+
+
+
+
+
+
+
+
 extension Date {
     func asString(style: DateFormatter.Style) -> String {
         let dateFormatter = DateFormatter()

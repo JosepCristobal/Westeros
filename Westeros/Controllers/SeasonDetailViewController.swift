@@ -16,13 +16,13 @@ class SeasonDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     // MARK: - Properties
-    var modelS: Seasons
+    var model: Seasons
     
     // MARK: - Initialitzation
     
-    init (modelS: Seasons){
+    init (model: Seasons){
         //Primero Limpias tu propio desorden
-        self.modelS = modelS
+        self.model = model
         //LLamas a super
         super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
         title = "Seasons"
@@ -47,9 +47,9 @@ class SeasonDetailViewController: UIViewController {
     //MARK: - Sync
     //Sincronizamos modelo con vista
     func syncModelWithView(){
-        nameSeason.text = modelS.name
-        releaseDateLabel.text = "Air date: \(modelS.releaseDate.asString(style: .long)) "
-        descriptionLabel.text = "Number of episodes: \(modelS.count) "
+        nameSeason.text = model.name
+        releaseDateLabel.text = "Air date: \(model.releaseDate.asString(style: .long)) "
+        descriptionLabel.text = "Number of episodes: \(model.count) "
     }
     
     //"House \(model.name)"
@@ -64,7 +64,7 @@ class SeasonDetailViewController: UIViewController {
 
     @objc func displayEpisodes(){
         //Creamos el EpisodesVC
-        let episodeListViewController = EpisodeListViewController(model: modelS.sortedMembers)
+        let episodeListViewController = EpisodeListViewController(model: model.sortedMembers)
         
         //Hacemos Push
         navigationController?.pushViewController(episodeListViewController, animated:true)
@@ -73,6 +73,18 @@ class SeasonDetailViewController: UIViewController {
   
 
 }
+
+//Esperamos la llamada del Delegado
+
+extension SeasonDetailViewController: SeasonListViewControllerDelegate{
+    func seasonListViewConroller(_ vc: SeasonListViewController, didSelectSeason season: Seasons) {
+        self.model = season
+        syncModelWithView()
+    }
+}
+
+
+
 
 extension Date {
     func toString(style: DateFormatter.Style) -> String {

@@ -107,9 +107,10 @@ class HouseViewListController: UITableViewController {
         let notification = Notification(name: Notification.Name(HOUSE_DID_CHANGE_NOTIFICATION_NAME), object: self, userInfo: [HOUSE_KEY: house])
         notificationCenter.post(notification)
         
-        // Guardar las coordenadas de la última casa seleccionada (seccion y fila)
-        saveLastSelectedHouse(at: indexPath.row)
+        //let lastRow = UserDefaults.standard.integer(forKey: LAST_HOUSE)
+        //let indexPath = IndexPath(row: lastRow, section: 0)
         
+        //tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         
     }
 }
