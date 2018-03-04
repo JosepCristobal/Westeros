@@ -59,48 +59,34 @@ class SeasonListViewController: UITableViewController {
         // Sincronizar modelo house con al cell que es la vista
         
         cell?.textLabel?.text = season.name
-        cell?.detailTextLabel?.text = "Air Date: \(season.releaseDate)"
+        cell?.detailTextLabel?.text = "Air Date: \(season.releaseDate.asString(style: .long))"
         return cell!
         
     }
-    
-    
-    
-    
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Averigura que Temporada nos han pulsado
+        let season = model[indexPath.row]
+        
+        //Creamos un controlador de detalle de esta temporada
+        let seasonDetailViewController = SeasonDetailViewController(modelS: season)
+        
+        //Hacemos un push
+        navigationController?.pushViewController(seasonDetailViewController, animated: true)
+        
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+}
+extension Date {
+    func asString(style: DateFormatter.Style) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = style
+        return dateFormatter.string(from: self)
+        /*
+         let myDate = Date()
+         myDate.asString(style: .full)   // Wednesday, January 10, 2018
+         myDate.asString(style: .long)   // January 10, 2018
+         myDate.asString(style: .medium) // Jan 10, 2018
+         myDate.asString(style: .short)  // 1/10/18
+         */
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
 }

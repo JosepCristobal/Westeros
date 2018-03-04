@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
          window?.rootViewController = seasonListViewController.wrappedInNavigtion()
-       // window?.rootViewController = splitViewController
+        //window?.rootViewController = splitViewController
         
         
         //UINavigationBar.appearance().backgroundColor = .blue

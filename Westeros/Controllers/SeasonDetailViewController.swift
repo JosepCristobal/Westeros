@@ -10,26 +10,81 @@ import UIKit
 
 class SeasonDetailViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    // MARK: - Outlets
+    @IBOutlet weak var nameSeason: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    // MARK: - Properties
+    var modelS: Seasons
+    
+    // MARK: - Initialitzation
+    
+    init (modelS: Seasons){
+        //Primero Limpias tu propio desorden
+        self.modelS = modelS
+        //LLamas a super
+        super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
+        title = "Seasons"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // Código generado por ...
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Añadimos un boton para poder navegar a Episode
+        setupUI()
+       syncModelWithView()
     }
-    */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        syncModelWithView()
+    }
 
+    //MARK: - Sync
+    //Sincronizamos modelo con vista
+    func syncModelWithView(){
+        nameSeason.text = modelS.name
+        releaseDateLabel.text = "Air date: \(modelS.releaseDate.asString(style: .long)) "
+        descriptionLabel.text = "Number of episodes: \(modelS.count) "
+    }
+    
+    //"House \(model.name)"
+    
+    
+    //MARK: - UI
+    func setupUI(){
+        let episode = UIBarButtonItem(title: "Episodes", style: .plain, target: self, action:
+            #selector(displayEpisodes))
+        navigationItem.rightBarButtonItems = [episode]
+    }
+
+    @objc func displayEpisodes(){
+        //Creamos el EpisodesVC
+        let episodeListViewController = EpisodeListViewController(model: modelS.sortedMembers)
+        
+        //Hacemos Push
+        navigationController?.pushViewController(episodeListViewController, animated:true)
+        
+    }
+  
+
+}
+
+extension Date {
+    func toString(style: DateFormatter.Style) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = style
+        return dateFormatter.string(from: self)
+        /*
+         let myDate = Date()
+         myDate.asString(style: .full)   // Wednesday, January 10, 2018
+         myDate.asString(style: .long)   // January 10, 2018
+         myDate.asString(style: .medium) // Jan 10, 2018
+         myDate.asString(style: .short)  // 1/10/18
+         */
+    }
 }
