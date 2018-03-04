@@ -35,11 +35,38 @@ class EpisodeDetailViewController: UIViewController {
 
         syncModelWithView()
     }
-    
+    //MARK: - Notifications
+    //Es muy importante subcribirse y a la vez desubcribirse
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Nos damos de alta en las notificaciones
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(seasonDidChange), name: Notification.Name(SEASON_DID_CHANGE_NOTIFICATION_NAME), object: nil)
         syncModelWithView()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Damos de baja las notificaciones
+        super.viewWillDisappear(animated)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+
+    
+    // MARK: - Notifications
+    @objc func seasonDidChange(notification: Notification){
+        // Extraer el userInfo de la notificacion
+        guard let info = notification.userInfo else{
+            return
+        }
+        // Sacar la casa del userInfo
+        let season = info[SEASON_KEY] as? Seasons
+        
+        // Actualizar el modelo
+        model = season!.sortedMembers[0]
+        syncModelWithView()
+    }
+
     
     //MARK: - Sync
     //Sincronizamos modelo con vista

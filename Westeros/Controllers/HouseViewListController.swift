@@ -90,27 +90,26 @@ class HouseViewListController: UITableViewController {
        //Averiguar que casa han pulsado
         let house = model [indexPath.row]
         
-        //Comentado, lo hacemos porque llamaremos al delegado
-        // Crear un controlador de detalle de esta casa
-        //let houseDetailViewController = HouseDetailViewController(model: house)
-        
-        // Hacer un push
-        //navigationController?.pushViewController(houseDetailViewController, animated: true)
-        
-        // Avisamos al delegado
-        delegate?.houseViewListController(self, didSelectHouse: house)
-        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // Estamos en iPad
+            // Avisamos al delegado
+            delegate?.houseViewListController(self, didSelectHouse: house)
+           
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            // Estamos en iPhone
+            // Crear un controlador de detalle de esta casa
+            let houseDetailViewController = HouseDetailViewController(model: house)
+            
+            // Hacer un push
+            navigationController?.pushViewController(houseDetailViewController, animated: true)
+        }
+             
         // Mando la misma info a través de notificaciones
         // Tenemos una clase llamada notification center
         let notificationCenter = NotificationCenter.default
         //Utilizamos este tipo para poder pasar la casa
         let notification = Notification(name: Notification.Name(HOUSE_DID_CHANGE_NOTIFICATION_NAME), object: self, userInfo: [HOUSE_KEY: house])
         notificationCenter.post(notification)
-        
-        //let lastRow = UserDefaults.standard.integer(forKey: LAST_HOUSE)
-        //let indexPath = IndexPath(row: lastRow, section: 0)
-        
-        //tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         
     }
 }

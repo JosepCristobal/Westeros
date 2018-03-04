@@ -15,8 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        // Codigo insertado en la tercera sesion
+        
         //Asignamos la variable window
         window = UIWindow(frame: UIScreen.main.bounds)
         
@@ -27,48 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         
-        
-        
         //Vamos a crear unos modelo
         let houses = Repository.local.houses
         let seasons = RepositorySeasons.localS.seasons
-      
-        
-        
-        // Vamos a recuperar datos desde un repositorio
-        //let starkSigil = Sigil(image:UIImage(named:"codeIsComing.png")!, description: "Lobo Huargo")
-        //let starkHouse = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno!")
-        //let lanisterSigil = Sigil(image: UIImage(named:"lannister.jpg")!, description: "Leon Rampante")
-       // let lanisterHouse = House(name: "Lanister", sigil: lanisterSigil, words: "Oye mi rugido!")
-        
-        // Vamos a crear los controladores
-        //let starkHouseViewController = HouseDetailViewController(model: starkHouse)
-        
-        //let lanisterHouseViewController = HouseDetailViewController(model: lanisterHouse)
-        //let controllers = houses.map {
-            //house in
-           // return HouseDetailViewController(model: house).wrappedInNavigtion()
-        //}
-        
-      //  var controllers = [UIViewController]()
-      //  for house in houses{
-      //     controllers.append(HouseDetailViewController(model: house).wrappedInNavigtion())
-       // }
-        
-        
-        //var navigationsControllers = [UINavigationController]()
-        //for controller in controllers {
-        //    navigationsControllers.append(controller.wrappedInNavigtion())
-        //}
-        
-        
-        // Creamos los navigations
-        
-        //let lanisterNavigationController = UINavigationController(rootViewController: lanisterHouseViewController)
-        //let starkNavigationController = UINavigationController(rootViewController: starkHouseViewController)
-        //let lanisterNavigationController = UINavigationController(rootViewController: lanisterHouseViewController)
-        //let root = UIViewController()
-        
         
         // Creamos los combinadores
         
@@ -93,46 +53,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Asignar los delegados
         houseListViewController.delegate = houseDetailViewController
         seasonListViewController.delegateS = seasonDetailViewController
+        
+        
         //Crear el UISplitVC y le asignamos los viewControlles (master y detail)
         
         let splitViewController = UISplitViewController()
         splitViewController.viewControllers = [
             tabBarViewControllerR.wrappedInNavigtion(),
-        houseDetailViewController.wrappedInNavigtion(),
+        //houseDetailViewController.wrappedInNavigtion(),
         seasonDetailViewController.wrappedInNavigtion()]
         // Primero el master y despues el detail
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // Estamos en iPad
+            window?.rootViewController = splitViewController
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            // Estamos en iPhone
+            window?.rootViewController = tabBarViewControllerR.wrappedInNavigtion()
+        }
         
-        
-        //Creamos la tabla
-       // let houseListViewController = HouseViewListController(model: houses)
-        
-        //Asignamos el rootVC
-        //Necesario para que funcione
-        //Proves de Seasons
-        
-        //window?.rootViewController=tabBarViewController
-        // window?.rootViewController = seasonListViewController.wrappedInNavigtion()
-        window?.rootViewController = splitViewController
-        
-        
-        //UINavigationBar.appearance().backgroundColor = .blue
-        
-        
-        
-        
-       // let tabBarViewController = UITabBarController()
-       // tabBarViewController.viewControllers = controllers
-        //tabBarViewController.viewControllers = houses
-               // .map{HouseDetailViewController(model: $0)}
-               // .map{$0.wrappedInNavigtion()}
-        //tabBarViewController.viewControllers = navigationsControllers
-        //tabBarViewController.viewControllers = [
-       //     starkHouseViewController.wrappedInNavigtion(), lanisterHouseViewController.wrappedInNavigtion()
-        //]
-        
-        // Asignamos el rootVC
-      //  window?.rootViewController = tabBarViewController
+       
+
         
         return true
     }

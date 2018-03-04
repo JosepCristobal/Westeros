@@ -10,7 +10,7 @@ import UIKit
 
 class EpisodeListViewController: UITableViewController {
     // Mark - Properties
-    let model: [Episode]
+    var model: [Episode]
     
     // Mark - Initialization
     init(model:[Episode]){
@@ -27,7 +27,22 @@ class EpisodeListViewController: UITableViewController {
         super.viewDidLoad()
 
     }
+    //MARK: - Notifications
+    //Es muy importante subcribirse y a la vez desubcribirse
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Nos damos de alta en las notificaciones
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(seasonDidChange), name: Notification.Name(SEASON_DID_CHANGE_NOTIFICATION_NAME), object: nil)
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // Damos de baja las notificaciones
+        super.viewWillDisappear(animated)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Necesitamos un identificador para cada tipo de celda
@@ -61,7 +76,20 @@ class EpisodeListViewController: UITableViewController {
         navigationController?.pushViewController(episodeDetailViewController, animated: true)
         
     }
-    
+    // MARK: - Notifications
+    @objc func seasonDidChange(notification: Notification){
+        // Extraer el userInfo de la notificacion
+        guard let info = notification.userInfo else{
+            return
+        }
+        // Sacar la casa del userInfo
+        let season = info[SEASON_KEY] as? Seasons
+        
+        // Actualizar el modelo
+        model = season!.sortedMembers
+        tableView.reloadData()
+    }
+
     
     // MARK: - Table view data source
 

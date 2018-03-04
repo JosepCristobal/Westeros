@@ -80,13 +80,22 @@ class SeasonListViewController: UITableViewController {
         //Averigura que Temporada nos han pulsado
         let season = model[indexPath.row]
         
-        //Creamos un controlador de detalle de esta temporada
-        //let seasonDetailViewController = SeasonDetailViewController(model: season)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // Estamos en iPad
+            //Avisamos al delegado
+            delegateS?.seasonListViewConroller(self, didSelectSeason: season)
+            
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            // Estamos en iPhone
+            //Creamos un controlador de detalle de esta temporada
+            let seasonDetailViewController = SeasonDetailViewController(model: season)
+            
+            //Hacemos un push
+            navigationController?.pushViewController(seasonDetailViewController, animated: true)
+        }
         
-        //Hacemos un push
-        //navigationController?.pushViewController(seasonDetailViewController, animated: true)
-        //Avisamos al delegado
-        delegateS?.seasonListViewConroller(self, didSelectSeason: season)
+        
+      
         
         //Mandamos la misma info a través de notificaciones
         //Utilizaremos la clase llamada notification center

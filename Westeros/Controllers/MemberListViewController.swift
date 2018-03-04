@@ -57,7 +57,6 @@ class MemberListViewController: UIViewController {
     // MARK: - Notifications
     @objc func houseDidChange(notification: Notification){
         // Extraer el userInfo de la notificacion
-        //let info = notification.userInfo! //mas elegante
         guard let info = notification.userInfo else{
             return
         }
@@ -67,10 +66,6 @@ class MemberListViewController: UIViewController {
         // Actualizar el modelo
         model = house!.sortedMembers
         tableView.reloadData()
-        
-        // Sincronizar la vista
-        //syncModelWithView()
-        
     }
 
 }
