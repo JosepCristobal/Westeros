@@ -53,6 +53,15 @@ class MemberListViewController: UIViewController {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let member = model[indexPath.row]
+        
+        //Creamos un controlador de detalle de esta temporada
+        let memberDetailViewController = MemberDetailViewController(model: member)
+        
+        //Hacemos un push
+        navigationController?.pushViewController(memberDetailViewController, animated: true)
+    }
     
     // MARK: - Notifications
     @objc func houseDidChange(notification: Notification){
@@ -71,8 +80,6 @@ class MemberListViewController: UIViewController {
 }
 
 
-
-
 // Mark - UITableViewDataSource
 extension MemberListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,27 +93,20 @@ extension MemberListViewController: UITableViewDataSource{
         // Preguntar por una celda (a una cache) o Crearla
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         ?? UITableViewCell(style: .default, reuseIdentifier: cellId)
-        // Si la celda no existe, la creamos
-        // if cell == nil{
-           // cell = UITableViewCell(style: .default, reuseIdentifier: cellId)
-        //}
-        
+      
         // Sincronizar celda y persona
         cell.textLabel?.text = person.fullName
         
         // Devolver la celda
         return cell
-        
     }
+    
+    
 }
-
-
-
 // Mark - UITableViewDelegate
 extension MemberListViewController: UITableViewDelegate{
     
     
 }
-
 
 

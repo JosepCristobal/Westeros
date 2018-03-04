@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		794C74BF204C9F7300A1B851 /* MemberDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794C74BD204C9F7300A1B851 /* MemberDetailViewController.swift */; };
+		794C74C0204C9F7300A1B851 /* MemberDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794C74BE204C9F7300A1B851 /* MemberDetailViewController.xib */; };
 		79A522A0204BF05F00F49FD9 /* EpisodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5229F204BF05F00F49FD9 /* EpisodeTests.swift */; };
 		79A522A2204BF09500F49FD9 /* SeasonsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A522A1204BF09500F49FD9 /* SeasonsTests.swift */; };
 		79A522A5204BF81600F49FD9 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A522A3204BF81600F49FD9 /* EpisodeListViewController.swift */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		794C74BD204C9F7300A1B851 /* MemberDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewController.swift; sourceTree = "<group>"; };
+		794C74BE204C9F7300A1B851 /* MemberDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberDetailViewController.xib; sourceTree = "<group>"; };
 		79A5229F204BF05F00F49FD9 /* EpisodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTests.swift; sourceTree = "<group>"; };
 		79A522A1204BF09500F49FD9 /* SeasonsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsTests.swift; sourceTree = "<group>"; };
 		79A522A3204BF81600F49FD9 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 				79A522A8204BF88500F49FD9 /* SeasonDetailViewController.xib */,
 				79A522AB204BF90500F49FD9 /* EpisodeDetailViewController.swift */,
 				79A522AC204BF90500F49FD9 /* EpisodeDetailViewController.xib */,
+				794C74BD204C9F7300A1B851 /* MemberDetailViewController.swift */,
+				794C74BE204C9F7300A1B851 /* MemberDetailViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 				79A522AE204BF90500F49FD9 /* EpisodeDetailViewController.xib in Resources */,
 				79ED2684202CE4B90041AD1E /* Assets.xcassets in Resources */,
 				79AE8AFB203238BC00DB8ECE /* targaryenSmall.jpg in Resources */,
+				794C74C0204C9F7300A1B851 /* MemberDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				794C74BF204C9F7300A1B851 /* MemberDetailViewController.swift in Sources */,
 				79ED26A3202CFDF50041AD1E /* Person.swift in Sources */,
 				79ED269F202CF1C20041AD1E /* House.swift in Sources */,
 				79FA0BDA204B1439002EDB2C /* Seasons.swift in Sources */,

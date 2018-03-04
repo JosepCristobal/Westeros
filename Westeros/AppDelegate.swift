@@ -60,9 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let splitViewController = UISplitViewController()
         splitViewController.viewControllers = [
             tabBarViewControllerR.wrappedInNavigtion(),
-        //houseDetailViewController.wrappedInNavigtion(),
+        houseDetailViewController.wrappedInNavigtion(),
         seasonDetailViewController.wrappedInNavigtion()]
         // Primero el master y despues el detail
+        // Mark - UITableViewDelegate
+        
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             // Estamos en iPad
@@ -71,10 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Estamos en iPhone
             window?.rootViewController = tabBarViewControllerR.wrappedInNavigtion()
         }
-        
-       
-
-        
+      
         return true
     }
 
@@ -82,4 +81,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
 
