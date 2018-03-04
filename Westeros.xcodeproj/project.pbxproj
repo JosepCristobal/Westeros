@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79A522A0204BF05F00F49FD9 /* EpisodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5229F204BF05F00F49FD9 /* EpisodeTests.swift */; };
+		79A522A2204BF09500F49FD9 /* SeasonsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A522A1204BF09500F49FD9 /* SeasonsTests.swift */; };
 		79AE8AFA203238BC00DB8ECE /* codeIsComing.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AE8AF7203238BC00DB8ECE /* codeIsComing.png */; };
 		79AE8AFB203238BC00DB8ECE /* targaryenSmall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AE8AF8203238BC00DB8ECE /* targaryenSmall.jpg */; };
 		79AE8AFC203238BC00DB8ECE /* lannister.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AE8AF9203238BC00DB8ECE /* lannister.jpg */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		79A5229F204BF05F00F49FD9 /* EpisodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTests.swift; sourceTree = "<group>"; };
+		79A522A1204BF09500F49FD9 /* SeasonsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsTests.swift; sourceTree = "<group>"; };
 		79AE8AF7203238BC00DB8ECE /* codeIsComing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = codeIsComing.png; sourceTree = "<group>"; };
 		79AE8AF8203238BC00DB8ECE /* targaryenSmall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = targaryenSmall.jpg; sourceTree = "<group>"; };
 		79AE8AF9203238BC00DB8ECE /* lannister.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lannister.jpg; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				79ED269C202CF00B0041AD1E /* HouseTests.swift */,
 				79ED26A0202CFD860041AD1E /* PersonTests.swift */,
 				79C585622033808400838B0F /* RepositoryTests.swift */,
+				79A5229F204BF05F00F49FD9 /* EpisodeTests.swift */,
+				79A522A1204BF09500F49FD9 /* SeasonsTests.swift */,
 			);
 			path = WesterosTests;
 			sourceTree = "<group>";
@@ -320,6 +326,8 @@
 			files = (
 				79ED269D202CF00B0041AD1E /* HouseTests.swift in Sources */,
 				79C585632033808400838B0F /* RepositoryTests.swift in Sources */,
+				79A522A2204BF09500F49FD9 /* SeasonsTests.swift in Sources */,
+				79A522A0204BF05F00F49FD9 /* EpisodeTests.swift in Sources */,
 				79ED26A1202CFD860041AD1E /* PersonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
